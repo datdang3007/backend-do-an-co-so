@@ -16,7 +16,6 @@ const TerritorySchema = new Schema(
     regionID: {
       type: String,
       require: true,
-      unique: true,
     },
     image: {
       type: String,

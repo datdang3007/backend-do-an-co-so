@@ -12,12 +12,10 @@ const ProvinceSchema = new Schema(
     territoryID: {
       type: String,
       require: true,
-      unique: true,
     },
     regionID: {
       type: String,
       require: true,
-      unique: true,
     },
     image: {
       type: String,

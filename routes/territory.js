@@ -4,6 +4,6 @@ const territoryController = require("../controllers/territoryController");
 
 router.post("/newTerritory", territoryController.addTerritory);
 router.get("/getTerritory", territoryController.getTerritory);
-router.get("/getTerritoryByID", territoryController.getTerritoryByID);
+router.post("/getTerritoryByID", territoryController.getTerritoryByID);
 
 module.exports = router;
