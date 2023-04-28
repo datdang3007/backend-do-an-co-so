@@ -8,6 +8,7 @@ const user = require("./routes/user");
 const region = require("./routes/region");
 const territory = require("./routes/territory");
 const province = require("./routes/province");
+const place = require("./routes/place");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -22,6 +23,7 @@ app.use("/api", user);
 app.use("/api", region);
 app.use("/api", territory);
 app.use("/api", province);
+app.use("/api", place);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

@@ -1,19 +1,27 @@
 const Territory = require("../models/territoryModel");
 
 exports.addTerritory = async (req, res) => {
-  const { name, slogan, regionID, image, overview } = req.body;
-  const territory = new Territory({
-    name,
-    slogan,
-    regionID,
-    image,
-    overview,
-  });
-  territory.save();
-  res.status(200).json({
-    success: true,
-    data: req.body,
-  });
+  try {
+    const { name, slogan, regionID, image, overview } = req.body;
+    const territory = new Territory({
+      name,
+      slogan,
+      regionID,
+      image,
+      overview,
+    });
+    territory.save();
+    res.status(200).json({
+      success: true,
+      data: req.body,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({
+      success: false,
+      message: "Server Error",
+    });
+  };
 };
 
 exports.getTerritory = async (req, res) => {

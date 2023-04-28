@@ -1,7 +1,7 @@
 const Place = require("../models/placeModel");
 
-exports.addNew = async (req, res) => {
-  const { name, provinceID, territoryID, regionID, image, overview, service, imgStock, likeArray, commentID } = req.body;
+exports.newPlace = async (req, res) => {
+  const { name, provinceID, territoryID, regionID, image, overview, service, content, imageID, likeArray, commentID} = req.body;
   const place = new Place({
     name,
     provinceID,
@@ -10,7 +10,8 @@ exports.addNew = async (req, res) => {
     image,
     overview,
     service,
-    imgStock,
+    content,
+    imageID,
     likeArray,
     commentID,
   });
@@ -19,4 +20,37 @@ exports.addNew = async (req, res) => {
     success: true,
     data: req.body,
   });
+};
+
+exports.getPlace = async (req, res) => {
+  try {
+    const places = await Place.find();
+    res.status(200).json({
+      success: true,
+      data: places,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+};
+
+exports.getPlaceByID = async (req, res) => {
+  try {
+    const { ID } = req.body;
+    const existingPlace = await Place.findOne({"_id": ID});
+    res.status(200).json({
+      success: true,
+      data: existingPlace
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({
+      success: false,
+      data: null
+    });
+  }
 };

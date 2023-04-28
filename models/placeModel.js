@@ -12,17 +12,14 @@ const placeModel = new Schema(
     provinceID: {
       type: String,
       require: true,
-      unique: true,
     },
     territoryID: {
       type: String,
       require: true,
-      unique: true,
     },
     regionID: {
       type: String,
       require: true,
-      unique: true,
     },
     image: {
       type: String,
@@ -33,16 +30,25 @@ const placeModel = new Schema(
       require: true,
     },
     service: {
-      type: Array,
+      type: Boolean,
+      require: true,
     },
-    imgStock: {
+    content: {
       type: Array,
+      require: true,
+    },
+    imageID: {
+      type: String,
+      require: true,
+      unique: true,
     },
     likeArray: {
       type: Array,
+      require: true,
     },
     commentID: {
       type: String,
+      require: true,
       unique: true,
     }
   },
@@ -53,4 +59,3 @@ const placeModel = new Schema(
 );
 
 module.exports = mongoose.model("place", placeModel);
-
