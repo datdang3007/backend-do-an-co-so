@@ -54,3 +54,20 @@ exports.getPlaceByID = async (req, res) => {
     });
   }
 };
+
+exports.getAllPlaceByTerritoryID = async (req, res) => {
+  try {
+    const { ID } = req.body;
+    const existingPlace = await Place.find({"territoryID": ID});
+    res.status(200).json({
+      success: true,
+      data: existingPlace
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({
+      success: false,
+      data: null
+    });
+  }
+};
