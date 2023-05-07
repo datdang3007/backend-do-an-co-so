@@ -47,3 +47,23 @@ exports.getRegionByID = async (req, res) => {
     });
   }
 };
+
+exports.editRegion = async (req, res) => {
+  const { regionID, name, slogan, image, overview } = req.body;
+  try {
+    const region = await Region.findById(regionID);
+    if (!region) {
+      return res.status(404).json({ success: false, message: "Region not found" });
+    }
+    region.name = name || region.name;
+    region.slogan = slogan || region.slogan;
+    region.image = image || region.image;
+    region.overview = overview || region.overview;
+    console.log(region);
+    await region.save();
+    res.status(200).json({ success: true, data: region });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, data: null });
+  }
+};

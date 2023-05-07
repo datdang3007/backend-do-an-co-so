@@ -57,3 +57,40 @@ exports.getTerritoryByID = async (req, res) => {
   }
 };
 
+exports.editTerritory = async (req, res) => {
+  const { territoryID, name, slogan, regionID, image, overview } = req.body;
+  try {
+    const territory = await Territory.findById(territoryID);
+    if (!territory) {
+      return res.status(404).json({ success: false, data: null });
+    }
+    territory.name = name || territory.name;
+    territory.slogan = slogan || territory.slogan;
+    territory.regionID = regionID || territory.regionID;
+    territory.image = image || territory.image;
+    territory.overview = overview || territory.overview;
+    console.log(territory);
+    await territory.save();
+    res.status(200).json({ success: true, data: territory });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, data: null });
+  }
+};
+
+// exports.getAllTerritoryByRegionID = async (req, res) => {
+//   try {
+//     const { ID } = req.body;
+//     const existingTerritory = await Territory.find({"regionID": ID});
+//     res.status(200).json({
+//       success: true,
+//       data: existingTerritory
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(200).json({
+//       success: false,
+//       data: null
+//     });
+//   }
+// };
