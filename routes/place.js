@@ -6,6 +6,8 @@ router.post("/newPlace", placeController.newPlace);
 router.get("/getPlace", placeController.getPlace);
 router.post("/getPlaceByID", placeController.getPlaceByID);
 router.post("/getAllPlaceByRegionID", placeController.getAllPlaceByRegionID);
+router.post("/editPlace", placeController.editPlace);
+router.post("/deletePlace", placeController.deletePlace);
 // router.post("/getAllPlaceByTerritoryID", placeController.getAllPlaceByTerritoryID);
 
 module.exports = router;

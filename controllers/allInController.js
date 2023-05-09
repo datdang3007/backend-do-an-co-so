@@ -8,7 +8,7 @@ function getRandomNumberTypeInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-  
+
 exports.getAllPlaceForTerritory = async (req, res) => {
   try {
     let result = []

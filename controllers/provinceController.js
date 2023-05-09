@@ -86,3 +86,27 @@ exports.editProvince = async (req, res) => {
     res.status(500).json({ success: false, data: null });
   }
 };
+
+exports.deleteProvince = async (req, res) => {
+  const { ID } = req.body;
+
+  try {
+    const province = await Province.findByIdAndRemove({ "_id": ID });
+    if (!province) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: province,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};

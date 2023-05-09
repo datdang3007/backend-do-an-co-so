@@ -67,3 +67,27 @@ exports.editRegion = async (req, res) => {
     res.status(500).json({ success: false, data: null });
   }
 };
+
+exports.deleteRegion = async (req, res) => {
+  const { ID } = req.body;
+
+  try {
+    const region = await Region.findByIdAndRemove({ "_id": ID });
+    if (!region) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: region,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};

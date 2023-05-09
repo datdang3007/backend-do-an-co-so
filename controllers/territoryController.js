@@ -78,6 +78,30 @@ exports.editTerritory = async (req, res) => {
   }
 };
 
+exports.deleteTerritory = async (req, res) => {
+  const { ID } = req.body;
+
+  try {
+    const territory = await Territory.findByIdAndRemove({ "_id": ID });
+    if (!territory) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: territory,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};
+
 // exports.getAllTerritoryByRegionID = async (req, res) => {
 //   try {
 //     const { ID } = req.body;
