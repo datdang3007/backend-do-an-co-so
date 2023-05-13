@@ -38,6 +38,34 @@ exports.getPlace = async (req, res) => {
   }
 };
 
+exports.getPlaceWithNameLike = async (req, res) => {
+  try {
+    const { nameSearching } = req.body;
+    const places = await Place.find();
+    
+    const filterPlaces = places.filter( val => val.name.includes(nameSearching) );
+
+    if (!filterPlaces || filterPlaces.length == 0) {
+      res.status(500).json({
+        success: false,
+        data: null,
+      });
+      return;
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: filterPlaces,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};
+
 exports.getPlaceByID = async (req, res) => {
   try {
     const { ID } = req.body;
@@ -55,22 +83,22 @@ exports.getPlaceByID = async (req, res) => {
   }
 };
 
-// exports.getAllPlaceByTerritoryID = async (req, res) => {
-//   try {
-//     const { ID } = req.body;
-//     const existingPlace = await Place.find({"territoryID": ID});
-//     res.status(200).json({
-//       success: true,
-//       data: existingPlace
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(200).json({
-//       success: false,
-//       data: null
-//     });
-//   }
-// };
+exports.getAllPlaceByProvinceID = async (req, res) => {
+  try {
+    const { ID } = req.body;
+    const existingPlace = await Place.find({"provinceID": ID});
+    res.status(200).json({
+      success: true,
+      data: existingPlace
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({
+      success: false,
+      data: null
+    });
+  }
+};
 
 exports.getAllPlaceByRegionID = async (req, res) => {
   try {

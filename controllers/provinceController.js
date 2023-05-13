@@ -49,10 +49,111 @@ exports.getProvinceByID = async (req, res) => {
   }
 };
 
+exports.getProvinceWithNameLike = async (req, res) => {
+  try {
+    const { nameSearching } = req.body;
+    const provinces = await Province.find();
+    
+    const filterProvinces = provinces.filter( val => val.name.includes(nameSearching) );
+
+    if (!filterProvinces || filterProvinces.length == 0) {
+      res.status(500).json({
+        success: false,
+        data: null,
+      });
+      return;
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: filterProvinces,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};
+
+exports.getProvinceWithNameLikeInRegionID = async (req, res) => {
+  try {
+    const { nameSearching, ID } = req.body;
+    const provinces = await Province.find({"regionID": ID});
+    
+    const filterProvinces = provinces.filter( val => val.name.includes(nameSearching) );
+
+    if (!filterProvinces || filterProvinces.length == 0) {
+      res.status(500).json({
+        success: false,
+        data: null,
+      });
+      return;
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: filterProvinces,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};
+
+exports.getProvinceWithNameLikeTerritoryID = async (req, res) => {
+  try {
+    const { nameSearching, ID } = req.body;
+    const provinces = await Province.find({"territoryID": ID});
+    
+    const filterProvinces = provinces.filter( val => val.name.includes(nameSearching) );
+
+    if (!filterProvinces || filterProvinces.length == 0) {
+      res.status(500).json({
+        success: false,
+        data: null,
+      });
+      return;
+    }
+    
+    res.status(200).json({
+      success: true,
+      data: filterProvinces,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};
+
 exports.getProvinceByRegionID = async (req, res) => {
   try {
     const { ID } = req.body;
     const listProvince = await Province.find({"regionID": ID});
+    res.status(200).json({
+      success: true,
+      data: listProvince
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({
+      success: false,
+      data: null
+    });
+  }
+};
+
+exports.getProvinceByTerritoryID = async (req, res) => {
+  try {
+    const { ID } = req.body;
+    const listProvince = await Province.find({"territoryID": ID});
     res.status(200).json({
       success: true,
       data: listProvince
