@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require("cors")
+const cors = require("cors");
 require("dotenv").config();
 require("./connectMongoo");
 const app = express();
@@ -10,6 +10,7 @@ const territory = require("./routes/territory");
 const province = require("./routes/province");
 const place = require("./routes/place");
 const allIn = require("./routes/allIn");
+const image = require("./routes/image");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -26,6 +27,7 @@ app.use("/api", territory);
 app.use("/api", province);
 app.use("/api", place);
 app.use("/api", allIn);
+app.use("/api", image);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
