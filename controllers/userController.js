@@ -64,3 +64,20 @@ exports.getUser = async (req, res) => {
     });
   }
 };
+
+exports.getUserByID = async (req, res) => {
+  try {
+    const { ID } = req.body;
+    const user = await User.findOne({"_id": ID});
+    res.status(200).json({
+      success: true,
+      data: user
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({
+      success: false,
+      data: null
+    });
+  }
+};
