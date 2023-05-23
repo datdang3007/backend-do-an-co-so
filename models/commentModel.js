@@ -8,12 +8,12 @@ const commentModel = new Schema(
       type: String,
       require: true,
     },
-    content: {
+    targetID: {
       type: String,
       require: true,
     },
-    time: {
-      type: Date,
+    comment: {
+      type: String,
       require: true,
     },
     likeArray: {

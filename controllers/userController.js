@@ -17,6 +17,22 @@ exports.register = async (req, res) => {
   });
 };
 
+exports.checkExistsName = async (req, res) => {
+  const { first_name, last_name } = req.body;
+  const existingUser = await User.findOne({"first_name": first_name, "last_name": last_name});
+  if (existingUser) {
+    res.status(200).json({
+      success: true,
+      data: existingUser
+    });
+  } else {
+    res.status(200).json({
+      success: false,
+      data: null
+    });
+  }
+};
+
 exports.checkExistsEmail = async (req, res) => {
   const { email } = req.body;
   const existingUser = await User.findOne({"email": email});

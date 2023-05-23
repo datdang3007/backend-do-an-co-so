@@ -83,6 +83,23 @@ exports.getPlaceByID = async (req, res) => {
   }
 };
 
+exports.getPlaceByImageID = async (req, res) => {
+  try {
+    const { ID } = req.body;
+    const existingPlace = await Place.findOne({"imageID": ID});
+    res.status(200).json({
+      success: true,
+      data: existingPlace
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(200).json({
+      success: false,
+      data: null
+    });
+  }
+};
+
 exports.getAllPlaceByProvinceID = async (req, res) => {
   try {
     const { ID } = req.body;
