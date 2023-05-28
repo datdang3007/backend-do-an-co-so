@@ -162,6 +162,28 @@ exports.editPlace = async (req, res) => {
   }
 };
 
+exports.editArrayLikeByID = async (req, res) => {
+  const { ID, data } = req.body;
+  try {
+    const place = await Place.findById(ID);
+    if (!place) {
+      return res.status(404).json({ success: false, data: null });
+    }
+    for (const [index, val] of Object.entries(place.likeArray)) {
+      if (val.userID == data.userID) {
+        place.likeArray.splice(index, 1);
+      }
+    }
+    place.likeArray.push(data);
+    console.log(place.likeArray);
+    await place.save();
+    res.status(200).json({ success: true, data: place });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, data: null });
+  }
+};
+
 exports.deletePlace = async (req, res) => {
   const { ID } = req.body;
 
