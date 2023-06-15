@@ -153,7 +153,6 @@ exports.editPlace = async (req, res) => {
     place.likeArray = likeArray || place.likeArray;
     place.commentID = commentID || place.commentID;
     
-    console.log(place);
     await place.save();
     res.status(200).json({ success: true, data: place });
   } catch (error) {
@@ -175,7 +174,6 @@ exports.editArrayLikeByID = async (req, res) => {
       }
     }
     place.likeArray.push(data);
-    console.log(place.likeArray);
     await place.save();
     res.status(200).json({ success: true, data: place });
   } catch (error) {
@@ -205,5 +203,21 @@ exports.deletePlace = async (req, res) => {
       success: false,
       data: null,
     });
+  }
+};
+
+exports.addConnectPlace = async (req, res) => {
+  const { ID } = req.body;
+  try {
+    const element = await Place.findById(ID);
+    if (!element) {
+      return res.status(404).json({ success: false, message: "element not found" });
+    }
+    element.connect = element.connect !== undefined ? element.connect + 1 : 0;
+    await element.save();
+    res.status(200).json({ success: true, data: element.connect });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, data: null });
   }
 };

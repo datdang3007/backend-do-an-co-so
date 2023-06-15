@@ -12,5 +12,6 @@ router.post("/getProvinceByTerritoryID", provinceController.getProvinceByTerrito
 router.post("/getProvinceWithNameLike", provinceController.getProvinceWithNameLike);
 router.post("/getProvinceWithNameLikeInRegionID", provinceController.getProvinceWithNameLikeInRegionID);
 router.post("/getProvinceWithNameLikeTerritoryID", provinceController.getProvinceWithNameLikeTerritoryID);
+router.post("/addConnectProvince", provinceController.addConnectProvince);
 
 module.exports = router;

@@ -91,3 +91,20 @@ exports.deleteRegion = async (req, res) => {
     });
   }
 };
+
+exports.addConnectRegion = async (req, res) => {
+  const { ID } = req.body;
+  try {
+    const element = await Region.findById(ID);
+    if (!element) {
+      return res.status(404).json({ success: false, message: "element not found" });
+    }
+    element.connect = element.connect !== undefined ? element.connect + 1 : 0;
+    console.log(element.connect);
+    await element.save();
+    res.status(200).json({ success: true, data: element.connect });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, data: null });
+  }
+};

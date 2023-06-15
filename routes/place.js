@@ -12,5 +12,6 @@ router.post("/editPlace", placeController.editPlace);
 router.post("/deletePlace", placeController.deletePlace);
 router.post("/getPlaceWithNameLike", placeController.getPlaceWithNameLike);
 router.post("/editArrayLikeByID", placeController.editArrayLikeByID);
+router.post("/addConnectPlace", placeController.addConnectPlace);
 
 module.exports = router;

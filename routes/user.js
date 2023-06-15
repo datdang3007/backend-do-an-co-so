@@ -8,5 +8,6 @@ router.post("/checkExistsEmail", userController.checkExistsEmail);
 router.post("/checkExistsPhone", userController.checkExistsPhone);
 router.post("/getUserByID", userController.getUserByID);
 router.post("/checkExistsName", userController.checkExistsName);
+router.post("/deleteUser", userController.deleteUser);
 
 module.exports = router;

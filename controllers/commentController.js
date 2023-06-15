@@ -30,7 +30,6 @@ exports.handleLikeByID = async (req, res) => {
       comment.likeArray.splice(indexExists, 1);
     }
     
-    console.log(comment);
     await comment.save();
     res.status(200).json({ success: true, data: comment });
   } catch (error) {

@@ -179,7 +179,6 @@ exports.editProvince = async (req, res) => {
     province.regionID = regionID || province.regionID;
     province.image = image || province.image;
     province.overview = overview || province.overview;
-    console.log(province);
     await province.save();
     res.status(200).json({ success: true, data: province });
   } catch (error) {
@@ -209,5 +208,22 @@ exports.deleteProvince = async (req, res) => {
       success: false,
       data: null,
     });
+  }
+};
+
+exports.addConnectProvince = async (req, res) => {
+  const { ID } = req.body;
+  try {
+    const element = await Province.findById(ID);
+    if (!element) {
+      return res.status(404).json({ success: false, message: "element not found" });
+    }
+    element.connect = element.connect !== undefined ? element.connect + 1 : 0;
+    console.log(element.connect);
+    await element.save();
+    res.status(200).json({ success: true, data: element.connect });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, data: null });
   }
 };

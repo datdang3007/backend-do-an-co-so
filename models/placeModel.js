@@ -50,7 +50,10 @@ const placeModel = new Schema(
       type: String,
       require: true,
       unique: true,
-    }
+    },
+    connect: {
+      type: Number,
+    },
   },
   {
     timestamps: true,

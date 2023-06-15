@@ -21,6 +21,9 @@ const RegionSchema = new Schema(
       type: String,
       require: true,
     },
+    connect: {
+      type: Number,
+    },
   },
   {
     timestamps: true,

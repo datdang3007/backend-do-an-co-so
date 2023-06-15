@@ -97,3 +97,27 @@ exports.getUserByID = async (req, res) => {
     });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  const { ID } = req.body;
+
+  try {
+    const user = await User.findByIdAndRemove({ "_id": ID });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        data: null,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: null,
+    });
+  }
+};
