@@ -34,3 +34,5 @@ app.use("/api", comment);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`we're on port ${PORT}`));
+
+module.exports = app;
