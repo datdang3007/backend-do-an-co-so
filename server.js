@@ -32,7 +32,5 @@ app.use("/api", allIn);
 app.use("/api", image);
 app.use("/api", comment);
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`we're on port ${PORT}`);
-});
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`we're on port ${PORT}`));
